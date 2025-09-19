@@ -28,17 +28,17 @@ def get_chunked_data(article_tokens: list, chunk_size_in_tokens: int, metadata: 
 	while len(article_tokens) != 0:
 		chunk_metadata = metadata.copy()
 		chunk_metadata['chunk_ID'] = chunk_ID
-		chunk = {'chunk_tokens': [], 'metadata': []}
+		chunk = {'chunk_text': '', 'metadata': {}}
 		chunk['metadata'] = chunk_metadata
-		chunk['chunk_tokens'] = get_chunk(article_tokens, chunk_size_in_tokens)
+		chunk['chunk_text'] = get_chunk_text(article_tokens, chunk_size_in_tokens)
 		chunked_data.append(chunk)
 		chunk_ID += 1
 	return chunked_data
 
-def get_chunk(article_tokens: list, chunk_size_in_tokens: int):
+def get_chunk_text(article_tokens: list, chunk_size_in_tokens: int):
 	if len(article_tokens) - chunk_size_in_tokens < chunk_size_in_tokens:
 		chunk_size_in_tokens = len(article_tokens)
-	return [article_tokens.pop(0) for _ in range(chunk_size_in_tokens)]
+	return ' '.join([article_tokens.pop(0) for _ in range(chunk_size_in_tokens)])
 
 def get_metadata(metadata_file: str):
 	with open(metadata_file, 'r') as metadata_f:
