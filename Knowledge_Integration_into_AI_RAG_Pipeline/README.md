@@ -8,3 +8,8 @@ sudo docker build -f Jupyter_Notebook.Dockerfile -t jupyter_notebook:latest .
 sudo docker pull qdrant/qdrant
 
 # === Run Docker containers via Docker Compose ===
+1) # Run in terminal, in project dir, in order to write ENV variables in composer.env file:
+echo "PROJECT_DIR=$(pwd)" > composer.env
+
+2) # Run Docker Compose file:
+sudo docker compose up
