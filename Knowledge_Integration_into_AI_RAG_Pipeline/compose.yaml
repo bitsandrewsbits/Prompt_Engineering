@@ -1,0 +1,16 @@
+services:
+  JupyterLab:
+    image: jupyter_notebook
+    env_file:
+     - composer.env
+    volumes: 
+      - $PROJECT_DIR:/home/jovyan
+    ports:
+      - "8888:8888"
+  
+  Qdrant_DB:
+    image: qdrant/qdrant
+    volumes:
+      - $PROJECT_DIR/qdrant_storage:/qdrant/storage:z
+    ports:
+      - "6333:6333"
