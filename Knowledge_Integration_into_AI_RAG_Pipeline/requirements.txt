@@ -2,4 +2,6 @@ requests
 bs4
 nltk
 sentence-transformers
+langchain-huggingface
+langchain-qdrant
 qdrant-client
