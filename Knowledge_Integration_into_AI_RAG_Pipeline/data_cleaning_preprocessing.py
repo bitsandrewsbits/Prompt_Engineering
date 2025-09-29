@@ -3,12 +3,9 @@ from bs4 import BeautifulSoup
 import nltk
 from nltk.corpus import stopwords
 import re
+from global_variables import *
 
-article_html_file = 'article.txt'
-preprocessed_article_text_file = 'cleaned_article.txt'
-
-article_language = 'russian'
-stopwords = stopwords.words(article_language)
+stopwords = stopwords.words(ARTICLE_LANGUAGE)
 
 def main(article_filename: str):
 	article_html = get_article_html(article_filename)
@@ -36,9 +33,9 @@ def get_article_html(article_filename: str):
 		article_html = article_f.read()
 	return article_html
 
-def save_preprocessed_article_text(preprocessed_text: str):
-	with open(preprocessed_article_text_file, 'w') as prep_txt_f:
+def save_preprocessed_article_text(preprocessed_text):
+	with open(PREPROCESSED_ARTICLE_TEXT_FILENAME, 'w') as prep_txt_f:
 		prep_txt_f.write(preprocessed_text)
 
 if __name__ == '__main__':
-	main(article_html_file)
+	main(ARTICLE_TXT_FILENAME)
