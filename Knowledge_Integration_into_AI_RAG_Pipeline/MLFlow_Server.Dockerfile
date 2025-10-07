@@ -3,5 +3,4 @@
 FROM ghcr.io/mlflow/mlflow
 
 RUN mkdir /mlflow
-
-CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000"]
+RUN pip install psycopg2-binary
