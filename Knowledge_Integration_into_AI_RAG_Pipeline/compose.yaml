@@ -29,12 +29,26 @@ services:
       - $PROJECT_DIR/LLM_model:/models
     networks:
       rag_pipeline:
-        ipv4_address: $LLAMACPP_Server_IP
+        ipv4_address: $LLAMACPP_SERVER_IP
     environment:
       LLAMA_ARG_MODEL_URL: "https://huggingface.co/TheBloke/Mistral-7B-v0.1-GGUF/resolve/main/mistral-7b-v0.1.Q4_K_M.gguf"
       LLAMA_ARG_CTX_SIZE: 4096
       LLAMA_ARG_ENDPOINT_METRICS: 1
       LLAMA_ARG_PORT: 8080
+
+  PostgreSQL_DB:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: $POSTGRESQL_DB_USERNAME
+      POSTGRES_PASSWORD: $POSTGRESQL_DB_PASSWORD
+      POSTGRES_DB: postgres
+    networks:
+      rag_pipeline:
+        ipv4_address: $POSTGRESQL_DB_IP
+    ports:
+      - "5432:5432"
+    volumes:
+      - $PROJECT_DIR/PostgreSQL_data:/postgresql/data
 
   MLFlow-Server:
     image: mlflow-server:latest
@@ -45,6 +59,9 @@ services:
         ipv4_address: $MLFLOW_IP
     ports:
       - "5000:5000"
+    depends_on:
+      - PostgreSQL_DB
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri $MLFLOW_TRACKING_URI
 
 networks:
   rag_pipeline:
