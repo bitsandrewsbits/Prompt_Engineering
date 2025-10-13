@@ -35,8 +35,9 @@ http://localhost:8888/?token=<token>
 	a) Open link - http://localhost:5000
 	b) Open created experiment by name and find Runs tab.
 	c) Also you can see in Traces tab, final trace - input(prompt)-output(answer) from LLM server.
+5) To see created RAG artifacts files for every Parent Run: Open Run tab -> Artefacts -> open files list.
 
-##### Note: for my laptop, it takes around 10 minutes in order to all containers will be healthy.
+##### Note: for my laptop, it takes around 10 minutes in order to all containers will have healthy status.
 ##### Llama Sever downloads model, and starts it. It takes time.
 ##### So, check periodically containers status - sudo docker ps.
 ##### Also in terminal, check, if LlamaCpp-Server container sends 200 - you can start project notebook.
